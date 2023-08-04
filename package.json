@@ -1,6 +1,6 @@
 {
   "name": "@webzlodimir/vue-bottom-sheet-vue2",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "",
   "repository": {
     "type": "git",
@@ -8,10 +8,10 @@
   },
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.js",
-    "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
-    "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
-    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
-    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
+    "build": "rimraf dist && cross-env NODE_ENV=production rollup --config build/rollup.config.js",
+    "build:ssr": "rimraf dist && cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
+    "build:es": "rimraf dist && cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
+    "build:unpkg": "rimraf dist && cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
     "size": "size-limit"
   },
   "keywords": [
@@ -37,8 +37,7 @@
   "module": "dist/vue-bottom-sheet-vue2.esm.js",
   "unpkg": "dist/vue-bottom-sheet-vue2.min.js",
   "files": [
-    "dist/*",
-    "src/**/*.vue"
+    "dist/*"
   ],
   "sideEffects": false,
   "dependencies": {
@@ -58,6 +57,7 @@
     "autoprefixer": "^9.8.6",
     "cross-env": "^7.0.3",
     "minimist": "^1.2.5",
+    "rimraf": "^5.0.1",
     "rollup": "^2.36.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-vue": "^5.1.9",

@@ -5,7 +5,7 @@
           :style="{ backgroundColor: overlayColor }"
           @click="clickOnOverlayHandler"
           class="bottom-sheet__overlay"
-          v-show="overlay && showSheet"
+          v-if="overlay && showSheet"
       />
     </transition>
     <div
@@ -40,7 +40,8 @@ export default {
   name: 'VueBottomSheetVue2',
   props: {
     overlay: {
-      type: Boolean
+      type: Boolean,
+      default: true
     },
     overlayColor: {
       type: String,
@@ -100,7 +101,7 @@ export default {
             }
           }
 
-          if (type === 'main' && event.type === 'pandown') {
+          if (type === 'main' && event.type === 'pandown' && this.contentScroll === 0) {
             this.translateValue = this.pixelToVh(event.deltaY)
           }
 

@@ -87,7 +87,7 @@ if (!argv.format || argv.format === 'es') {
         input: 'src/entry.esm.js',
         external,
         output: {
-            file: 'dist/vue-bottom-sheet.esm.js',
+            file: 'dist/vue-bottom-sheet-vue2.esm.js',
             format: 'esm',
             exports: 'named',
         },
@@ -120,9 +120,9 @@ if (!argv.format || argv.format === 'cjs') {
         external,
         output: {
             compact: true,
-            file: 'dist/vue-bottom-sheet.ssr.js',
+            file: 'dist/vue-bottom-sheet-vue2.ssr.js',
             format: 'cjs',
-            name: 'VueBottomSheet',
+            name: 'VueBottomSheetVue2',
             exports: 'auto',
             globals,
         },
@@ -150,9 +150,9 @@ if (!argv.format || argv.format === 'iife') {
         external,
         output: {
             compact: true,
-            file: 'dist/vue-bottom-sheet.min.js',
+            file: 'dist/vue-bottom-sheet-vue2.min.js',
             format: 'iife',
-            name: 'VueBottomSheet',
+            name: 'VueBottomSheetVue2',
             exports: 'auto',
             globals,
         },
