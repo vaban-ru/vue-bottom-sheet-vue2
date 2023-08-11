@@ -264,6 +264,7 @@ export default {
     overflow-y: hidden;
     box-sizing: border-box;
     pointer-events: all;
+    width: 100%;
 
     &--fullscreen {
       border-radius: 0;
