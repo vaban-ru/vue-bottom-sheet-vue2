@@ -24,7 +24,7 @@
         </div>
         <slot name="header" />
       </header>
-      <main ref="bottomSheetMain" class="bottom-sheet__main">
+      <main ref="bottomSheetMain" class="bottom-sheet__main" :style="{overflowY: showSheet ? 'auto' : 'hidden'}">
         <slot />
       </main>
       <footer ref="bottomSheetFooter" class="bottom-sheet__footer">
@@ -62,12 +62,16 @@ export default {
     canSwipe: {
       type: Boolean,
       default: true
+    },
+    closeHeightPercent: {
+      type: Number,
+      default: 100,
     }
   },
   data() {
     return {
       showSheet: false,
-      translateValue: 100,
+      translateValue: this.closeHeightPercent,
       isDragging: false,
       contentScroll: 0,
       sheetHeight: 0
@@ -93,20 +97,55 @@ export default {
           e.preventDefault()
         }
 
-        if (event.deltaY > 0) {
+        if (type === 'main') {
+          this.contentScroll = this.$refs.bottomSheetMain.scrollTop
+          document.documentElement.style.overflowY = 'hidden'
+          document.documentElement.style.overscrollBehavior = 'none'
+        }
+
+        if (this.showSheet) {
+          if (event.deltaY > 0) {
+            if (type === 'main' && event.type === 'panup') {
+              this.translateValue = this.pixelToVh(event.deltaY)
+              if (event.cancelable) {
+                this.$refs.bottomSheetMain.addEventListener('touchmove', preventDefault)
+              }
+            }
+
+            if (type === 'main' && event.type === 'pandown' && this.contentScroll === 0) {
+              this.translateValue = this.pixelToVh(event.deltaY)
+            }
+
+            if (type === 'area') {
+              this.translateValue = this.pixelToVh(event.deltaY)
+            }
+
+            if (event.type === 'panup') {
+              this.$emit('dragging-up')
+            }
+            if (event.type === 'pandown') {
+              this.$emit('dragging-down')
+            }
+          }
+        } else {
           if (type === 'main' && event.type === 'panup') {
-            this.translateValue = this.pixelToVh(event.deltaY)
             if (event.cancelable) {
               this.$refs.bottomSheetMain.addEventListener('touchmove', preventDefault)
             }
+            let tslVal = this.closeHeightPercent + this.pixelToVh(event.deltaY)
+            if (tslVal >= 0) {
+              this.translateValue = tslVal
+            }
           }
-
           if (type === 'main' && event.type === 'pandown' && this.contentScroll === 0) {
-            this.translateValue = this.pixelToVh(event.deltaY)
+            this.translateValue = this.closeHeightPercent + this.pixelToVh(event.deltaY)
           }
 
           if (type === 'area') {
-            this.translateValue = this.pixelToVh(event.deltaY)
+            let tslVal = this.closeHeightPercent + this.pixelToVh(event.deltaY)
+            if (tslVal >= 0) {
+              this.translateValue = tslVal
+            }
           }
 
           if (event.type === 'panup') {
@@ -124,10 +163,18 @@ export default {
             this.contentScroll = this.$refs.bottomSheetMain.scrollTop
           }
           this.isDragging = false
-          if (this.translateValue >= 10) {
-            this.close()
+          if (this.showSheet) {
+            if ((this.pixelToVh(event.deltaY) >= 15 && this.contentScroll === 0) || (this.pixelToVh(event.deltaY) >= 15 && type === 'area')) {
+              this.close()
+            } else {
+              this.open()
+            }
           } else {
-            this.translateValue = 0
+            if (this.pixelToVh(event.deltaY) <= -5) {
+              this.open()
+            } else {
+              this.close()
+            }
           }
         }
       }
@@ -139,7 +186,7 @@ export default {
     },
     close() {
       this.showSheet = false
-      this.translateValue = 100
+      this.translateValue = this.closeHeightPercent
       setTimeout(() => {
         document.documentElement.style.overflowY = 'auto'
         document.documentElement.style.overscrollBehavior = ''
@@ -243,7 +290,7 @@ export default {
   }
 
   &[aria-hidden='true'] {
-    visibility: hidden;
+    //visibility: hidden;
     pointer-events: none;
   }
 
