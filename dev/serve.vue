@@ -72,6 +72,18 @@
               class="form-control"
           />
         </div>
+        <div class="form-group mb-3">
+          <label for="closeHeightPercent" class="form-label">Close Height Percent (%):</label>
+          <input
+              name="closeHeightPercentInput"
+              type="number"
+              min="0"
+              max="100"
+              id="closeHeightPercentInput"
+              v-model.number="closeHeightPercent"
+              class="form-control"
+          />
+        </div>
       </div>
     </div>
     <button class="btn btn-primary" type="button" @click="open">Open bottom sheet</button>
@@ -83,6 +95,7 @@
         :overlay="overlay"
         :can-swipe="canSwipe"
         :overlay-color="overlayColorSelect"
+        :close-height-percent="closeHeightPercent"
         ref="myBottomSheet"
     >
       <div class="sheet-content">
@@ -155,6 +168,7 @@ export default Vue.extend({
       overlay: true,
       maxWidth: 640,
       maxHeight: undefined,
+      closeHeightPercent: 100,
       overlayColorSelect: "#0000004D",
       backgroundScrollable: false,
       backgroundClickable: false,
