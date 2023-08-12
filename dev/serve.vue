@@ -52,6 +52,12 @@
         </div>
       </div>
       <div class="col-md-4 col-12">
+        <div class="mb-3">
+          <h6>Drag Color</h6>
+          <sketch-picker v-model="dragColorSelect"/>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
         <div class="form-group mb-3">
           <label for="maxWidthInput" class="form-label">Max width (px):</label>
           <input
@@ -104,7 +110,8 @@
         :max-height="maxHeight"
         :overlay="overlay"
         :can-swipe="canSwipe"
-        :overlay-color="overlayColorSelect"
+        :overlay-color="overlyHexColor"
+        :drag-color="dragHexColor"
         :close-height-percent="closeHeightPercent"
         :init-sheet-height="initSheetHeight"
         ref="myBottomSheet"
@@ -185,7 +192,8 @@ export default Vue.extend({
       backgroundScrollable: false,
       backgroundClickable: false,
       clickToClose: true,
-      canSwipe: true
+      canSwipe: true,
+      dragColorSelect: '#333333FF'
     };
   },
   components: {
@@ -204,6 +212,10 @@ export default Vue.extend({
     overlyHexColor() {
       if (this.overlayColorSelect != null)
         return this.overlayColorSelect.hex8;
+    },
+    dragHexColor(){
+      if (this.dragColorSelect != null)
+        return this.dragColorSelect.hex8;
     }
   }
 });
