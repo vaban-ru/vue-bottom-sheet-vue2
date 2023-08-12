@@ -57,14 +57,18 @@ yarn add @webzlodimir/vue-bottom-sheet-vue2
 ```
 ## Props
 
-| Prop                | Type    | Description                                                                           | Example                        | Defaults  |
-|---------------------|---------|---------------------------------------------------------------------------------------|--------------------------------|-----------|
-| max-width           | Number  | Set max-width of component card in px                                                 | `:max-width="640"`             | 640       |
-| max-height          | Number  | Sets the maximum height of the window, if not set it takes the height of the content  | `:max-height="90"`             | -         |
-| can-swipe           | Boolean | Enable or disable swipe to close                                                      | `:can-swipe="false"`           | true      |
-| overlay             | Boolean | Enable overlay                                                                        | `:overlay="false"`             | true      |
-| overlay-color       | String  | Set overlay color with opacity                                                        | `overlay-color="#0000004D"`    | #0000004D |
-| overlay-click-close | Boolean | Close window on overlay click                                                         | `:overlay-click-close="false"` | true      |
+| Prop                          | Type    | Description                                                                                                                            | Example                        | Defaults  |
+|-------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|-----------|
+| max-width                     | Number  | Set max-width of component card in px                                                                                                  | `:max-width="640"`             | 640       |
+| max-height                    | Number  | Sets the maximum height of the window, if not set it takes the height of the content                                                   | `:max-height="90"`             | -         |
+| can-swipe                     | Boolean | Enable or disable swipe to close                                                                                                       | `:can-swipe="false"`           | true      |
+| overlay                       | Boolean | Enable overlay                                                                                                                         | `:overlay="false"`             | true      |
+| overlay-color                 | String  | Set overlay color with opacity                                                                                                         | `overlay-color="#0000004D"`    | #0000004D |
+| overlay-click-close           | Boolean | Close window on overlay click                                                                                                          | `:overlay-click-close="false"` | true      |
+| close-height-percent `v0.0.7` | Number  | Set the percentage of the height in the Off state to the height in the fully enabled state. 100 indicates that the height is fully off | `:close-height-percent="50"`   | true      |
+| init-sheet-height `v0.0.8`    | Number  | Sets the initial height of the window, if not set it takes the height of the content                                                   | `:init-sheet-height="300"`     | -         |
+| z-index `v0.0.8`              | Number  | Set z-index of component card                                                                                                          | `:z-index="1001"`              | 99999     |
+| custom-class `v0.0.8`         | String  | The component custom class name                                                                                                        | `custom-class="custom-style"`  | ''        |
 
 ## Events
 
