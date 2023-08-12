@@ -74,6 +74,10 @@ export default {
     zIndex: {
       type: Number,
       default: 99999
+    },
+    customClass:{
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -260,7 +264,8 @@ export default {
         {
           'bottom-sheet__content--fullscreen': this.sheetHeight >= window.innerHeight,
           'bottom-sheet__content--dragging': this.isDragging
-        }
+        },
+        this.customClass
       ]
     },
     maxWidthString() {
