@@ -66,6 +66,10 @@ export default {
     closeHeightPercent: {
       type: Number,
       default: 100,
+    },
+    initSheetHeight: {
+      type: Number,
+      default: undefined
     }
   },
   data() {
@@ -79,10 +83,10 @@ export default {
   },
   methods: {
     initHeight() {
-      this.sheetHeight =
-          this.$refs.bottomSheetHeader.offsetHeight +
+      this.sheetHeight = this.initSheetHeight ??
+          (this.$refs.bottomSheetHeader.offsetHeight +
           this.$refs.bottomSheetMain.offsetHeight +
-          this.$refs.bottomSheetFooter.offsetHeight
+          this.$refs.bottomSheetFooter.offsetHeight)
     },
     clickOnOverlayHandler() {
       if (this.overlayClickClose) {
@@ -239,6 +243,11 @@ export default {
        this.dragHandler(e, 'main')
      })
    }, 100)
+  },
+  watch: {
+    initSheetHeight(newVal, oldVal){
+      this.initHeight()
+    }
   },
   computed: {
     sheetContentClasses() {
