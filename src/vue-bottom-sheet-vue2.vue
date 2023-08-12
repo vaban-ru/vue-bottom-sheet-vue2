@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-sheet" ref="bottomSheet" :aria-hidden="!showSheet" role="dialog">
+  <div class="bottom-sheet" :style="{zIndex: zIndex}" ref="bottomSheet" :aria-hidden="!showSheet" role="dialog">
     <transition name="fade">
       <div
           :style="{ backgroundColor: overlayColor }"
@@ -70,6 +70,10 @@ export default {
     initSheetHeight: {
       type: Number,
       default: undefined
+    },
+    zIndex: {
+      type: Number,
+      default: 99999
     }
   },
   data() {
@@ -277,7 +281,6 @@ export default {
 
 <style lang="scss" scoped>
 .bottom-sheet {
-  z-index: 99999;
   display: flex;
   flex-direction: column;
   align-items: center;
