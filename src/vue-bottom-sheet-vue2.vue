@@ -20,7 +20,9 @@
     >
       <header ref="bottomSheetHeader" class="bottom-sheet__header">
         <div class="bottom-sheet__draggable-area" ref="bottomSheetDraggableArea">
-          <div class="bottom-sheet__draggable-thumb"></div>
+          <slot name="drag">
+            <div class="bottom-sheet__draggable-thumb" :style="{backgroundColor: dragColor}"></div>
+          </slot>
         </div>
         <slot name="header" />
       </header>
@@ -78,6 +80,10 @@ export default {
     customClass:{
       type: String,
       default: ''
+    },
+    dragColor: {
+      type: String,
+      default: '#333333'
     }
   },
   data() {
