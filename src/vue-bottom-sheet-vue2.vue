@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-sheet" ref="bottomSheet" :aria-hidden="!showSheet" role="dialog">
+  <div class="bottom-sheet" :style="{zIndex: zIndex}" ref="bottomSheet" :aria-hidden="!showSheet" role="dialog">
     <transition name="fade">
       <div
           :style="{ backgroundColor: overlayColor }"
@@ -20,7 +20,9 @@
     >
       <header ref="bottomSheetHeader" class="bottom-sheet__header">
         <div class="bottom-sheet__draggable-area" ref="bottomSheetDraggableArea">
-          <div class="bottom-sheet__draggable-thumb"></div>
+          <slot name="drag">
+            <div class="bottom-sheet__draggable-thumb" :style="{backgroundColor: dragColor}"></div>
+          </slot>
         </div>
         <slot name="header" />
       </header>
@@ -66,6 +68,22 @@ export default {
     closeHeightPercent: {
       type: Number,
       default: 100,
+    },
+    initSheetHeight: {
+      type: Number,
+      default: undefined
+    },
+    zIndex: {
+      type: Number,
+      default: 99999
+    },
+    customClass:{
+      type: String,
+      default: ''
+    },
+    dragColor: {
+      type: String,
+      default: '#333333'
     }
   },
   data() {
@@ -79,10 +97,10 @@ export default {
   },
   methods: {
     initHeight() {
-      this.sheetHeight =
-          this.$refs.bottomSheetHeader.offsetHeight +
+      this.sheetHeight = this.initSheetHeight ??
+          (this.$refs.bottomSheetHeader.offsetHeight +
           this.$refs.bottomSheetMain.offsetHeight +
-          this.$refs.bottomSheetFooter.offsetHeight
+          this.$refs.bottomSheetFooter.offsetHeight)
     },
     clickOnOverlayHandler() {
       if (this.overlayClickClose) {
@@ -240,6 +258,11 @@ export default {
      })
    }, 100)
   },
+  watch: {
+    initSheetHeight(newVal, oldVal){
+      this.initHeight()
+    }
+  },
   computed: {
     sheetContentClasses() {
       return [
@@ -247,7 +270,8 @@ export default {
         {
           'bottom-sheet__content--fullscreen': this.sheetHeight >= window.innerHeight,
           'bottom-sheet__content--dragging': this.isDragging
-        }
+        },
+        this.customClass
       ]
     },
     maxWidthString() {
@@ -268,7 +292,6 @@ export default {
 
 <style lang="scss" scoped>
 .bottom-sheet {
-  z-index: 99999;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -52,6 +52,12 @@
         </div>
       </div>
       <div class="col-md-4 col-12">
+        <div class="mb-3">
+          <h6>Drag Color</h6>
+          <sketch-picker v-model="dragColorSelect"/>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
         <div class="form-group mb-3">
           <label for="maxWidthInput" class="form-label">Max width (px):</label>
           <input
@@ -69,6 +75,16 @@
               type="number"
               id="maxHeightInput"
               v-model="maxHeight"
+              class="form-control"
+          />
+        </div>
+        <div class="form-group mb-3">
+          <label for="initSheetHeightInput" class="form-label">Init Sheet Height (px):</label>
+          <input
+              name="initSheetHeightInput"
+              type="number"
+              id="initSheetHeightInput"
+              v-model.number="initSheetHeight"
               class="form-control"
           />
         </div>
@@ -94,8 +110,10 @@
         :max-height="maxHeight"
         :overlay="overlay"
         :can-swipe="canSwipe"
-        :overlay-color="overlayColorSelect"
+        :overlay-color="overlyHexColor"
+        :drag-color="dragHexColor"
         :close-height-percent="closeHeightPercent"
+        :init-sheet-height="initSheetHeight"
         ref="myBottomSheet"
     >
       <div class="sheet-content">
@@ -168,12 +186,14 @@ export default Vue.extend({
       overlay: true,
       maxWidth: 640,
       maxHeight: undefined,
+      initSheetHeight: undefined,
       closeHeightPercent: 100,
       overlayColorSelect: "#0000004D",
       backgroundScrollable: false,
       backgroundClickable: false,
       clickToClose: true,
-      canSwipe: true
+      canSwipe: true,
+      dragColorSelect: '#333333FF'
     };
   },
   components: {
@@ -192,6 +212,10 @@ export default Vue.extend({
     overlyHexColor() {
       if (this.overlayColorSelect != null)
         return this.overlayColorSelect.hex8;
+    },
+    dragHexColor(){
+      if (this.dragColorSelect != null)
+        return this.dragColorSelect.hex8;
     }
   }
 });
