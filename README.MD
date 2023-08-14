@@ -8,7 +8,7 @@
 A nice clean and touch-friendly bottom sheet component based on [Vue.js 2](https://vuejs.org/) and [hammer.js](https://hammerjs.github.io/) for Vue 2
 
 - [Vue 3 Version](https://github.com/vaban-ru/vue-bottom-sheet)
-- :clapper: [Demo](https://bs.vaban.ru/)
+- :clapper: [Demo](https://bs2.vaban.ru/)
 - [中文文档](https://github.com/vaban-ru/vue-bottom-sheet-vue2/blob/master/README_CN.MD)
 
 ## Installation
