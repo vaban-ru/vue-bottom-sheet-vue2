@@ -217,21 +217,25 @@ export default {
       document.documentElement.style.overscrollBehavior = 'none'
       this.showSheet = true
       this.$emit('opened')
-    }
+    },
+    keyupHandler(event){
+      const isFocused = (element) => document.activeElement === element
+      const isSheetElementFocused =
+          this.$refs.bottomSheet.contains(event.target) && isFocused(event.target)
+
+      if (event.key === 'Escape' && !isSheetElementFocused) {
+        this.close()
+      }
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyup', this.keyupHandler)
   },
   async mounted() {
    setTimeout(() =>{
      this.initHeight()
-     const isFocused = (element) => document.activeElement === element
 
-     window.addEventListener('keyup', (event) => {
-       const isSheetElementFocused =
-           this.$refs.bottomSheet.contains(event.target) && isFocused(event.target)
-
-       if (event.key === 'Escape' && !isSheetElementFocused) {
-         this.close()
-       }
-     })
+     window.addEventListener('keyup', this.keyupHandler)
 
      /**
       * Create instances of Hammerjs
