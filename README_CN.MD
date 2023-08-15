@@ -10,7 +10,7 @@
 和 [hammer.js](https://hammerjs.github.io/)
 
 - [Vue 3 Version](https://github.com/vaban-ru/vue-bottom-sheet)
-- :clapper: [Demo](https://bs.vaban.ru/)
+- :clapper: [Demo](https://bs2.vaban.ru/)
 - [英文文档](https://github.com/vaban-ru/vue-bottom-sheet-vue2)
 
 ## 安装
