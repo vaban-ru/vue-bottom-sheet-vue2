@@ -75,6 +75,7 @@ export default {
 | custom-class `v0.0.8`         | String  | 组件自定义类名                           | `custom-class="custom-style"`  | ''        |
 | init-sheet-height `v0.0.8`    | Number  | 设置窗口的初始高度，如果未设置，则采用内容高度           | `:init-sheet-height="300"`     | -         |
 | z-index `v0.0.8`              | Number  | 设置窗口的z-index                      | `:z-index="1001"`              | 99999     |
+| transition-duration           | Number  | 过渡动画持续时间                          | `:transition-duration="0.5"`   | 0.5       |
 
 ### custom-class说明
 
