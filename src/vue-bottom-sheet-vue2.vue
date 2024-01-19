@@ -84,7 +84,11 @@ export default {
     dragColor: {
       type: String,
       default: '#333333'
-    }
+    },
+    transitionDuration: {
+      type: Number,
+      default: 0.5,
+    },
   },
   data() {
     return {

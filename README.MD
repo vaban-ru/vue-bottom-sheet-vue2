@@ -71,6 +71,7 @@ yarn add @webzlodimir/vue-bottom-sheet-vue2
 | z-index `v0.0.8`              | Number  | Set z-index of component card                                                                                                          | `:z-index="1001"`              | 99999      |
 | custom-class `v0.0.8`         | String  | The component custom class name                                                                                                        | `custom-class="custom-style"`  | ''         |
 | drag-color `v0.0.8`           | String  | Drag the bar icon color                                                                                                                | `drag-color="#ffc107"`         | #333333    |
+| transition-duration           | Number  | Transition animation duration                                                                                                          | `:transition-duration="0.5"`   | 0.5        |
 
 ## Events
 
